@@ -1,7 +1,10 @@
 package dev.cooremans.app;
 
+import dev.cooremans.daos.RolesDAO;
+import dev.cooremans.daos.RolesDaoPostgres;
 import dev.cooremans.daos.UsersDAO;
 import dev.cooremans.daos.UsersDaoPostgres;
+import dev.cooremans.entities.Roles;
 import dev.cooremans.entities.Users;
 import dev.cooremans.utils.ConnectionUtil;
 
@@ -15,7 +18,13 @@ public class App {
     public static void main(String[] args) throws SQLException {
 
         UsersDAO usersDAO = new UsersDaoPostgres();
-        //System.out.println(usersDAO.getAllUsers());
+        RolesDAO rolesDAO = new RolesDaoPostgres();
+        rolesDAO.deleteById(5);
+
+        // HOW TO CREATE A NEW ROLE
+//        Roles newRole = new Roles(0, "Something");
+//        rolesDAO.createRole(newRole);
+//        System.out.println(newRole);
 
         // HOW TO CREATE A NEW USER
 //        Users newUser = new Users(0, "Jake", "Statefarm", "JakeState@gmail.com", "Kakies", "ILOVEPANTS", 3, 1);
@@ -25,7 +34,7 @@ public class App {
 //        Users user = usersDAO.getUserById(2);
 //        user.setUsername("Salads");
 //        usersDAO.updateUser(user);
-        usersDAO.deleteUserById(8);
+        // usersDAO.deleteUserById(8);
 
     }
 
