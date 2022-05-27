@@ -1,9 +1,6 @@
 package dev.cooremans.app;
 
-import dev.cooremans.daos.RolesDAO;
-import dev.cooremans.daos.RolesDaoPostgres;
-import dev.cooremans.daos.UsersDAO;
-import dev.cooremans.daos.UsersDaoPostgres;
+import dev.cooremans.daos.*;
 import dev.cooremans.entities.Roles;
 import dev.cooremans.entities.Users;
 import dev.cooremans.utils.ConnectionUtil;
@@ -19,6 +16,7 @@ public class App {
 
         UsersDAO usersDAO = new UsersDaoPostgres();
         RolesDAO rolesDAO = new RolesDaoPostgres();
+        DepartmentsDAO departmentsDAO = new DepartmentsDaoPostgres();
         rolesDAO.deleteById(5);
 
         // HOW TO CREATE A NEW ROLE
