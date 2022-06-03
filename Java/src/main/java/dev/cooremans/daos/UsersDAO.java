@@ -11,6 +11,7 @@ public interface UsersDAO {
 
     // READ
     Users getUserById(int id);
+    Users getUserByUsername(String username);
     List<Users> getAllUsers();
 
     // UPDATE

@@ -2,16 +2,20 @@ package dev.cooremans.daos;
 
 import dev.cooremans.entities.Users;
 import dev.cooremans.utils.ConnectionUtil;
+import dev.cooremans.utils.LogLevel;
+import dev.cooremans.utils.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsersDaoPostgres implements UsersDAO{
+    private String logString;
 
     @Override
     public Users createUser(Users user) {
         try(Connection conn = ConnectionUtil.getConnection()){
+            logString = String.format("Attemptin to create a new user with id of %d", user.getId());
             String sql = "insert into Users values (default,?,?,?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getFirst_name());
@@ -67,6 +71,34 @@ public class UsersDaoPostgres implements UsersDAO{
         }
         return null;
     }
+
+    @Override
+    public Users getUserByUsername(String username) {
+        try(Connection conn = ConnectionUtil.getConnection()){
+            String sql = "select * from Users where username = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+
+            rs.next();
+
+            Users users = new Users();
+            users.setId(rs.getInt("id"));
+            users.setFirst_name(rs.getString("first_name"));
+            users.setLast_name(rs.getString("last_name"));
+            users.setEmail(rs.getString("email"));
+            users.setUsername(rs.getString("username"));
+            users.setPassword(rs.getString("password"));
+            users.setRole_id(rs.getInt("role_id"));
+            users.setDepartment_id(rs.getInt("department_id"));
+            return users;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     @Override
     public List<Users> getAllUsers() {

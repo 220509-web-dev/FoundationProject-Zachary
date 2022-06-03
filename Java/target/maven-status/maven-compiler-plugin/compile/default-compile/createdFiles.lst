@@ -1,0 +1,16 @@
+dev\cooremans\entities\Departments.class
+dev\cooremans\daos\RolesDAO.class
+dev\cooremans\servlets\UserServlet.class
+dev\cooremans\daos\DepartmentsDAO.class
+dev\cooremans\daos\UsersDaoPostgres.class
+dev\cooremans\utils\LogLevel.class
+dev\cooremans\daos\RolesDaoPostgres.class
+dev\cooremans\daos\UsersDAO.class
+dev\cooremans\utils\ConnectionUtil.class
+dev\cooremans\entities\Roles.class
+dev\cooremans\utils\ContextLoaderListener.class
+dev\cooremans\entities\Users.class
+dev\cooremans\utils\Logger.class
+dev\cooremans\app\App.class
+dev\cooremans\servlets\SanityServlets.class
+dev\cooremans\daos\DepartmentsDaoPostgres.class

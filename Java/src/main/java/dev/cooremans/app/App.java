@@ -17,9 +17,9 @@ public class App {
         UsersDAO usersDAO = new UsersDaoPostgres();
         RolesDAO rolesDAO = new RolesDaoPostgres();
         DepartmentsDAO departmentsDAO = new DepartmentsDaoPostgres();
-        rolesDAO.deleteById(5);
+        //rolesDAO.deleteById(5);
 
-        // HOW TO CREATE A NEW ROLE
+//        HOW TO CREATE A NEW ROLE
 //        Roles newRole = new Roles(0, "Something");
 //        rolesDAO.createRole(newRole);
 //        System.out.println(newRole);
@@ -33,6 +33,10 @@ public class App {
 //        user.setUsername("Salads");
 //        usersDAO.updateUser(user);
         // usersDAO.deleteUserById(8);
+
+        Users user = usersDAO.getUserByUsername("ZacharyC");
+        System.out.println(user);
+
 
     }
 

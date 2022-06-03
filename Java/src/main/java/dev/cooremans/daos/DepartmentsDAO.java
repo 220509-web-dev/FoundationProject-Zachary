@@ -17,5 +17,6 @@ public interface DepartmentsDAO {
     Departments updateDepartment(Departments department);
 
     // DELETE
+
     Departments deleteById(int department_id);
 }
