@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 public class SanityServlets extends HttpServlet {
 
+    // Servlet lifecycle hooks
     @Override
     public void init() throws ServletException {
         System.out.println("[LOG] - SanityServlet instantiated!");
@@ -36,5 +37,4 @@ public class SanityServlets extends HttpServlet {
         resp.getWriter().write("This is the response payload");
 
     }
-
 }

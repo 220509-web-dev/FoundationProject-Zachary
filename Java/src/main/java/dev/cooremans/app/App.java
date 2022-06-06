@@ -17,6 +17,9 @@ public class App {
         UsersDAO usersDAO = new UsersDaoPostgres();
         RolesDAO rolesDAO = new RolesDaoPostgres();
         DepartmentsDAO departmentsDAO = new DepartmentsDaoPostgres();
+
+
+        System.out.println(usersDAO.getAllUsers());
         //rolesDAO.deleteById(5);
 
 //        HOW TO CREATE A NEW ROLE
@@ -36,7 +39,6 @@ public class App {
 
         Users user = usersDAO.getUserByUsername("ZacharyC");
         System.out.println(user);
-
 
     }
 

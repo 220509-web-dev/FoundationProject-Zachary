@@ -13,6 +13,7 @@ public class ContextLoaderListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce){
+
         System.out.println("[LOG] -  The servlet was initialized at " + LocalDateTime.now());
 
         ObjectMapper mapper = new ObjectMapper();
@@ -29,4 +30,6 @@ public class ContextLoaderListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         System.out.println("[LOG] - The servlet context was destroyed at " + LocalDateTime.now());
-    }}
+    }
+
+}

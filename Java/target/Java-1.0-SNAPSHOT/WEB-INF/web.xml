@@ -4,10 +4,14 @@
              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <display-name>Foundation Project</display-name>
+    <display-name>FoundationProject</display-name>
+    <context-param>
+        <param-name>test-context-key</param-name>
+        <param-value>test-context-value</param-value>
+    </context-param>
 
     <servlet>
-        <servlet-name>SanityServlet</servlet-name>
+        <servlet-name>SanityServlets</servlet-name>
         <servlet-class>dev.cooremans.servlets.SanityServlets</servlet-class>
 
         <init-param>
@@ -17,15 +21,16 @@
 
         <load-on-startup>1</load-on-startup>
 
-        <servlet-mapping>
-            <servlet-name>SanityServlet</servlet-name>
-            <url-pattern>/sanity</url-pattern>
-        </servlet-mapping>
-
-        <listener>
-            <listener-class>dev.cooremans.utils.ContextLoaderListener</listener-class>
-        </listener>
-
     </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>SanityServlets</servlet-name>
+        <url-pattern>/sanity</url-pattern>
+    </servlet-mapping>
+
+    <listener>
+        <listener-class>dev.cooremans.utils.ContextLoaderListener</listener-class>
+    </listener>
 
 </web-app>

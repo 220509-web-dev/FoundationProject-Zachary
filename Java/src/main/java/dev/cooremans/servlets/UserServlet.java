@@ -1,15 +1,26 @@
 package dev.cooremans.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.cooremans.daos.UsersDAO;
+import dev.cooremans.daos.UsersDaoPostgres;
+import dev.cooremans.entities.Users;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class UserServlet extends HttpServlet {
 
     private final ObjectMapper mapper;
 
     public UserServlet(ObjectMapper mapper) { this.mapper = mapper;}
+
+    UsersDAO usersDAO = new UsersDaoPostgres();
 
     @Override
     public void init() throws ServletException {
@@ -20,4 +31,38 @@ public class UserServlet extends HttpServlet {
         System.out.println("[LOG] - Context param, test-context-key: " + this.getServletContext().getInitParameter("test-context-key"));
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        // This is from data
+        //System.out.println(usersDAO.getAllUsers());
+        Users user = new Users(1, "Zachary", "Cooremans", "zcooremans@gmail.com", "ZacharyC", "Password", 1, 2);
+
+        String respPayload = mapper.writeValueAsString(user);
+        resp.setContentType("application/json");
+        resp.getWriter().write(respPayload);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        System.out.println("[LOG] - UserServlet received a request at " + LocalDateTime.now());
+        try {
+            Users newUser = mapper.readValue(req.getInputStream(), Users.class);
+            System.out.println(newUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        resp.setStatus(204);
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPut(req, resp);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doDelete(req, resp);
+    }
 }
