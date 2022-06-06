@@ -11,7 +11,7 @@ public class DepartmentsDaoPostgres implements DepartmentsDAO{
 
     @Override
     public Departments createDepartment(Departments department) {
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             String sql = "insert into departments values (default, ?)";
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, department.getDepartment_name());
@@ -33,7 +33,7 @@ public class DepartmentsDaoPostgres implements DepartmentsDAO{
 
     @Override
     public Departments getDepartmentById(int department_id) {
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             String sql = "select * from Departments where department_id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, department_id);
@@ -54,7 +54,7 @@ public class DepartmentsDaoPostgres implements DepartmentsDAO{
 
     @Override
     public List<Departments> getAllDepartments() {
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             String sql = "select * from Departments";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -77,7 +77,7 @@ public class DepartmentsDaoPostgres implements DepartmentsDAO{
 
     @Override
     public Departments updateDepartment(Departments department) {
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             String sql = "update Departments set department_name = ? where department_id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -96,7 +96,7 @@ public class DepartmentsDaoPostgres implements DepartmentsDAO{
 
     @Override
     public Departments deleteById(int department_id) {
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             String sql = "delete from Departments where department_id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, department_id);

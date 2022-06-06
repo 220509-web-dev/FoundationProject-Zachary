@@ -14,7 +14,7 @@ public class UsersDaoPostgres implements UsersDAO{
 
     @Override
     public Users createUser(Users user) {
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             logString = String.format("Attemptin to create a new user with id of %d", user.getId());
             String sql = "insert into Users values (default,?,?,?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -45,7 +45,7 @@ public class UsersDaoPostgres implements UsersDAO{
 
     @Override
     public Users getUserById(int id) {
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             String sql = "select * from Users where id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1,id);
@@ -74,7 +74,7 @@ public class UsersDaoPostgres implements UsersDAO{
 
     @Override
     public Users getUserByUsername(String username) {
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             String sql = "select * from Users where username = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, username);
@@ -99,15 +99,15 @@ public class UsersDaoPostgres implements UsersDAO{
         return null;
     }
 
-
     @Override
     public List<Users> getAllUsers() {
-        try(Connection conn = ConnectionUtil.getConnection()){
+
+        List<Users> users = new ArrayList<Users>();
+
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             String sql = "select * from Users";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-
-            List<Users> users = new ArrayList<Users>();
 
             while(rs.next()){
                 Users user = new Users();
@@ -121,17 +121,16 @@ public class UsersDaoPostgres implements UsersDAO{
                 user.setDepartment_id(rs.getInt("department_id"));
                 users.add(user);
             }
-            return users;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("An error occured within UsersDao#getAllUsers");
         }
-        return null;
+        return users;
     }
 
     @Override
     public Users updateUser(Users user) {
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             String sql = "update Users set first_name = ?, last_name = ?, email = ?, username = ?, password = ?, role_id = ?, department_id = ? where id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -156,7 +155,7 @@ public class UsersDaoPostgres implements UsersDAO{
 
     @Override
     public Users deleteUserById(int id) {
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             String sql = "delete from Users where id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
@@ -166,4 +165,14 @@ public class UsersDaoPostgres implements UsersDAO{
         }
         return null;
     }
+
+//    public Users save(Users newUser) {
+//        try(Connection conn = ConnectionUtil.getConnection()) {
+//            String sql = "INSERT INTO Users Values (default, ?, ?, ?, ?, ?, ?, ?)";
+//            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//        } catch(SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
 }

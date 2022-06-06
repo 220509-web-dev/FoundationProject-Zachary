@@ -6,21 +6,22 @@ import dev.cooremans.daos.UsersDaoPostgres;
 import dev.cooremans.entities.Users;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class UserServlet extends HttpServlet {
 
     private final ObjectMapper mapper;
+    private final UsersDaoPostgres userDAO;
 
-    public UserServlet(ObjectMapper mapper) { this.mapper = mapper;}
-
-    UsersDAO usersDAO = new UsersDaoPostgres();
+    public UserServlet(ObjectMapper mapper, UsersDaoPostgres userDAO) {
+        this.mapper = mapper;
+        this.userDAO = userDAO;
+    }
 
     @Override
     public void init() throws ServletException {
@@ -34,11 +35,8 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        // This is from data
-        //System.out.println(usersDAO.getAllUsers());
-        Users user = new Users(1, "Zachary", "Cooremans", "zcooremans@gmail.com", "ZacharyC", "Password", 1, 2);
-
-        String respPayload = mapper.writeValueAsString(user);
+        List<Users> users = userDAO.getAllUsers();
+        String respPayload = mapper.writeValueAsString(users);
         resp.setContentType("application/json");
         resp.getWriter().write(respPayload);
     }

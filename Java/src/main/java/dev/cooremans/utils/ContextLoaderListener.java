@@ -1,6 +1,7 @@
 package dev.cooremans.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.cooremans.daos.UsersDaoPostgres;
 import dev.cooremans.servlets.UserServlet;
 
 import javax.servlet.ServletContext;
@@ -15,9 +16,10 @@ public class ContextLoaderListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce){
 
         System.out.println("[LOG] -  The servlet was initialized at " + LocalDateTime.now());
+        UsersDaoPostgres userDAO = new UsersDaoPostgres();
 
         ObjectMapper mapper = new ObjectMapper();
-        UserServlet userServlet = new UserServlet(mapper);
+        UserServlet userServlet = new UserServlet(mapper, userDAO);
 
         ServletContext context = sce.getServletContext();
         ServletRegistration.Dynamic registeredServlet = context.addServlet("UserServlet", userServlet);

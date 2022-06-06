@@ -1,8 +1,11 @@
 dev\cooremans\entities\Departments.class
+dev\cooremans\services\UsersService.class
 dev\cooremans\daos\RolesDAO.class
 dev\cooremans\servlets\UserServlet.class
+dev\cooremans\utils\exceptions\DataSourceException.class
 dev\cooremans\daos\DepartmentsDAO.class
 dev\cooremans\daos\UsersDaoPostgres.class
+dev\cooremans\utils\exceptions\InvalidRequestException.class
 dev\cooremans\utils\LogLevel.class
 dev\cooremans\daos\RolesDaoPostgres.class
 dev\cooremans\daos\UsersDAO.class

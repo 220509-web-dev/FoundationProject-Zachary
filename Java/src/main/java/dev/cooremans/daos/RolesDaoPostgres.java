@@ -11,7 +11,7 @@ public class RolesDaoPostgres implements RolesDAO{
 
     @Override
     public Roles createRole(Roles role) {
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             String sql = "insert into Roles values (default, ?)";
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, role.getRole());
@@ -33,7 +33,7 @@ public class RolesDaoPostgres implements RolesDAO{
 
     @Override
     public Roles getRoleById(int id) {
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             String sql = "select * from Roles where id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1,id);
@@ -54,7 +54,7 @@ public class RolesDaoPostgres implements RolesDAO{
 
     @Override
     public List<Roles> getAllRoles() {
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             String sql = "select * from Roles";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -78,7 +78,7 @@ public class RolesDaoPostgres implements RolesDAO{
 
     @Override
     public Roles updateRole(Roles role) {
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             String sql = "update Roles set role = ? where id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -96,7 +96,7 @@ public class RolesDaoPostgres implements RolesDAO{
 
     @Override
     public Roles deleteById(int id) {
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()){
             String sql = "delete from Roles where id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
