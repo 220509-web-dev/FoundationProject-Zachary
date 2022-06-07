@@ -8,6 +8,7 @@ dev\cooremans\daos\UsersDaoPostgres.class
 dev\cooremans\utils\exceptions\InvalidRequestException.class
 dev\cooremans\utils\LogLevel.class
 dev\cooremans\daos\RolesDaoPostgres.class
+dev\cooremans\servlets\AuthServlet.class
 dev\cooremans\daos\UsersDAO.class
 dev\cooremans\utils\ConnectionUtil.class
 dev\cooremans\entities\Roles.class

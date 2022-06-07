@@ -2,6 +2,7 @@ package dev.cooremans.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.cooremans.daos.UsersDaoPostgres;
+import dev.cooremans.servlets.AuthServlet;
 import dev.cooremans.servlets.UserServlet;
 
 import javax.servlet.ServletContext;
@@ -20,8 +21,12 @@ public class ContextLoaderListener implements ServletContextListener {
 
         ObjectMapper mapper = new ObjectMapper();
         UserServlet userServlet = new UserServlet(mapper, userDAO);
+        AuthServlet authServlet = new AuthServlet(mapper, userDAO);
 
         ServletContext context = sce.getServletContext();
+
+        context.addServlet("AuthServlet", authServlet).addMapping("/auth/*");
+
         ServletRegistration.Dynamic registeredServlet = context.addServlet("UserServlet", userServlet);
         registeredServlet.setLoadOnStartup(3);
         registeredServlet.setInitParameter("user-servlet-key", "user-servlet-value");
