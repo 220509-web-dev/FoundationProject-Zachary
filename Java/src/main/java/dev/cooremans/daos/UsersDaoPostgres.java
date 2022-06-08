@@ -2,8 +2,7 @@ package dev.cooremans.daos;
 
 import dev.cooremans.entities.Users;
 import dev.cooremans.utils.ConnectionUtil;
-import dev.cooremans.utils.LogLevel;
-import dev.cooremans.utils.Logger;
+import dev.cooremans.utils.exceptions.DataSourceException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -164,6 +163,35 @@ public class UsersDaoPostgres implements UsersDAO{
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Users save(Users newUser) {
+        try(Connection conn = ConnectionUtil.getInstance().getConnection()) {
+
+            String sql = "INSERT INTO Users VALUES (default, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, newUser.getFirst_name());
+            ps.setString(2,newUser.getLast_name());
+            ps.setString(3,newUser.getEmail());
+            ps.setString(4,newUser.getUsername());
+            ps.setString(5, newUser.getPassword());
+            ps.setInt(6,newUser.getRole_id());
+            ps.setInt(7,newUser.getDepartment_id());
+
+            int rowsInserted = ps.executeUpdate();
+            if (rowsInserted != 0) {
+                ResultSet rs = ps.getGeneratedKeys();
+                rs.next();
+                newUser.setId(rs.getInt("id"));
+                return newUser;
+            }
+
+            throw new RuntimeException("Should never be here");
+
+        } catch (SQLException e) {
+            throw new DataSourceException("An error occurred during data access", e);
+        }
+
     }
 
 //    public Users save(Users newUser) {

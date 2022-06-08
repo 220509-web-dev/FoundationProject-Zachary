@@ -5,6 +5,7 @@ C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\de
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\daos\DepartmentsDAO.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\utils\exceptions\InvalidRequestException.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\utils\Logger.java
+C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\dto\ErrorResponse.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\utils\LogLevel.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\entities\Users.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\utils\ConnectionUtil.java
@@ -15,6 +16,7 @@ C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\de
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\servlets\SanityServlets.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\servlets\UserServlet.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\daos\RolesDaoPostgres.java
+C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\dto\ResourceCreationResponse.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\entities\Departments.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\app\App.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\entities\Roles.java

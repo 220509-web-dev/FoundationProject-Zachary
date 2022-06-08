@@ -3,6 +3,7 @@ dev\cooremans\services\UsersService.class
 dev\cooremans\daos\RolesDAO.class
 dev\cooremans\servlets\UserServlet.class
 dev\cooremans\utils\exceptions\DataSourceException.class
+dev\cooremans\dto\ErrorResponse.class
 dev\cooremans\daos\DepartmentsDAO.class
 dev\cooremans\daos\UsersDaoPostgres.class
 dev\cooremans\utils\exceptions\InvalidRequestException.class
@@ -16,5 +17,6 @@ dev\cooremans\utils\ContextLoaderListener.class
 dev\cooremans\entities\Users.class
 dev\cooremans\utils\Logger.class
 dev\cooremans\app\App.class
+dev\cooremans\dto\ResourceCreationResponse.class
 dev\cooremans\servlets\SanityServlets.class
 dev\cooremans\daos\DepartmentsDaoPostgres.class

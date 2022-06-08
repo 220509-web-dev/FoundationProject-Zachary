@@ -2,7 +2,12 @@ package dev.cooremans.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.cooremans.daos.UsersDaoPostgres;
+import dev.cooremans.dto.ErrorResponse;
+import dev.cooremans.dto.ResourceCreationResponse;
 import dev.cooremans.entities.Users;
+import dev.cooremans.services.UsersService;
+import dev.cooremans.utils.exceptions.DataSourceException;
+import dev.cooremans.utils.exceptions.InvalidRequestException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,11 +22,11 @@ import java.util.List;
 public class UserServlet extends HttpServlet {
 
     private final ObjectMapper mapper;
-    private final UsersDaoPostgres userDAO;
+    private final UsersService usersService;
 
-    public UserServlet(ObjectMapper mapper, UsersDaoPostgres userDAO) {
+    public UserServlet(ObjectMapper mapper, UsersService usersService) {
         this.mapper = mapper;
-        this.userDAO = userDAO;
+        this.usersService = usersService;
     }
 
     @Override
@@ -36,40 +41,51 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<Users> users = userDAO.getAllUsers();
-        String respPayload = mapper.writeValueAsString(users);
-        resp.setContentType("application/json");
-        resp.getWriter().write(respPayload);
+//        List<Users> users = userDAO.getAllUsers();
+//        String respPayload = mapper.writeValueAsString(users);
+//        resp.setContentType("application/json");
+//        resp.getWriter().write(respPayload);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         System.out.println("[LOG] - UserServlet received a request at " + LocalDateTime.now());
-        try {
+//        try {
+//            Users newUser = mapper.readValue(req.getInputStream(), Users.class);
+//            System.out.println(newUser);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        HttpSession session = req.getSession(false);
+//        if (session == null) {
+//            HashMap<String, Object> errorMessage = new HashMap<>();
+//            errorMessage.put("code", 401);
+//            errorMessage.put("message", "No session found on request");
+//            errorMessage.put("timestamp", LocalDateTime.now().toString());
+//
+//            resp.setStatus(401); //UNAUTHORIZED USER
+//            resp.setContentType("application/json");
+//            resp.getWriter().write(mapper.writeValueAsString(errorMessage));
+//            return;
+//        }
+//        resp.setStatus(204);
+        resp.setContentType("application/json");
+        try{
             Users newUser = mapper.readValue(req.getInputStream(), Users.class);
-            System.out.println(newUser);
-        } catch (Exception e) {
-            e.printStackTrace();
+            ResourceCreationResponse payload = usersService.createNewUser(newUser);
+            resp.setStatus(201);
+            resp.getWriter().write(mapper.writeValueAsString(payload));
+        } catch (InvalidRequestException e) {
+            resp.setStatus(400);
+            resp.getWriter().write(mapper.writeValueAsString(new ErrorResponse(400, e.getMessage())));
+        } catch (DataSourceException e) {
+            resp.setStatus(500);
+            System.out.println(e.getMessage());
+            resp.getWriter().write(mapper.writeValueAsString(new ErrorResponse(500, "An internal error occurred. Devs please check application logs.")));
         }
-        HttpSession session = req.getSession(false);
-        if (session == null) {
-            HashMap<String, Object> errorMessage = new HashMap<>();
-            errorMessage.put("code", 401);
-            errorMessage.put("message", "No session found on request");
-            errorMessage.put("timestamp", LocalDateTime.now().toString());
 
-            resp.setStatus(401); //UNAUTHORIZED USER
-            resp.setContentType("application/json");
-            resp.getWriter().write(mapper.writeValueAsString(errorMessage));
-            return;
-        }
-        resp.setStatus(204);
-    }
 
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp);
     }
 
     @Override
