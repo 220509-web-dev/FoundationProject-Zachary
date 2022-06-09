@@ -3,6 +3,8 @@ C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\de
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\daos\RolesDAO.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\utils\ContextLoaderListener.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\daos\DepartmentsDAO.java
+C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\services\AuthService.java
+C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\services\UserService.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\utils\exceptions\InvalidRequestException.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\utils\Logger.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\dto\ErrorResponse.java
@@ -11,9 +13,7 @@ C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\de
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\utils\ConnectionUtil.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\utils\exceptions\DataSourceException.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\servlets\AuthServlet.java
-C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\services\UsersService.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\daos\UsersDaoPostgres.java
-C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\servlets\SanityServlets.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\servlets\UserServlet.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\daos\RolesDaoPostgres.java
 C:\Users\zcoor\Desktop\Revature\Projects\FoundationProject\Java\src\main\java\dev\cooremans\dto\ResourceCreationResponse.java

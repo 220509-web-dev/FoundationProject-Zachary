@@ -1,6 +1,7 @@
 package dev.cooremans.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.cooremans.daos.UsersDaoPostgres;
 import dev.cooremans.dto.ErrorResponse;
 import dev.cooremans.dto.ResourceCreationResponse;
 import dev.cooremans.entities.Users;
@@ -22,8 +23,11 @@ public class UserServlet extends HttpServlet {
     private final ObjectMapper mapper;
     private final AuthService authService;
 
-    public UserServlet(ObjectMapper mapper, AuthService authService) {
+    private final UsersDaoPostgres userDAO;
+
+    public UserServlet(ObjectMapper mapper,UsersDaoPostgres userDAO, AuthService authService) {
         this.mapper = mapper;
+        this.userDAO = userDAO;
         this.authService = authService;
     }
 
@@ -39,7 +43,30 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //List<Users> users = usersService.getAllUsers();
+        String username = req.getParameter("username");
+        String id = req.getParameter("id");
+        System.out.println("[LOG] - MADE IT INSIDE GET");
+
+        if (username != null) {
+            System.out.println("[LOG] - MADE IT INSIDE username");
+
+            Users user = authService.getByUsername(username);
+            resp.setContentType("application/json");
+            resp.getWriter().write(String.valueOf(user));
+        } else if (id != null) {
+            System.out.println("[LOG] - MADE IT INSIDE id");
+
+            Users user = authService.getUserBeId(id);
+            resp.setContentType("application/json");
+            resp.getWriter().write(String.valueOf(user));
+        } else {
+            System.out.println("[LOG] - MADE IT INSIDE all");
+            List<Users> users = userDAO.getAllUsers();
+            String response = mapper.writeValueAsString(users);
+            resp.setContentType("application/json");
+            resp.getWriter().write(response);
+        }
+
 
     }
 
@@ -47,26 +74,9 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         System.out.println("[LOG] - UserServlet received a request at " + LocalDateTime.now());
-//        try {
-//            Users newUser = mapper.readValue(req.getInputStream(), Users.class);
-//            System.out.println(newUser);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        HttpSession session = req.getSession(false);
-//        if (session == null) {
-//            HashMap<String, Object> errorMessage = new HashMap<>();
-//            errorMessage.put("code", 401);
-//            errorMessage.put("message", "No session found on request");
-//            errorMessage.put("timestamp", LocalDateTime.now().toString());
-//
-//            resp.setStatus(401); //UNAUTHORIZED USER
-//            resp.setContentType("application/json");
-//            resp.getWriter().write(mapper.writeValueAsString(errorMessage));
-//            return;
-//        }
-//        resp.setStatus(204);
+
         resp.setContentType("application/json");
+
         try{
             Users newUser = mapper.readValue(req.getInputStream(), Users.class);
             ResourceCreationResponse payload = authService.createNewUser(newUser);
@@ -80,7 +90,6 @@ public class UserServlet extends HttpServlet {
             System.out.println(e.getMessage());
             resp.getWriter().write(mapper.writeValueAsString(new ErrorResponse(500, "An internal error occurred. Devs please check application logs.")));
         }
-
 
     }
 

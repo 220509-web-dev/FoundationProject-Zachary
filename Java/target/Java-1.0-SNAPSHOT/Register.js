@@ -16,6 +16,7 @@ function Register() {
         body: JSON.stringify({first_name, last_name, email, username, password, role_id, department_id})
     }) .then(res => {
         console.log(res)
+        window.location.href = 'index.html'
     }) .catch (err => {
         console.log(err)
     })

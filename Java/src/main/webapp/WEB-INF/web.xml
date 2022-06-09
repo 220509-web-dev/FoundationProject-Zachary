@@ -9,29 +9,6 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-    <context-param>
-        <param-name>test-context-key</param-name>
-        <param-value>test-context-value</param-value>
-    </context-param>
-
-    <servlet>
-        <servlet-name>SanityServlets</servlet-name>
-        <servlet-class>dev.cooremans.servlets.SanityServlets</servlet-class>
-
-        <init-param>
-            <param-name>test-init-key</param-name>
-            <param-value>test-init-value</param-value>
-        </init-param>
-
-        <load-on-startup>1</load-on-startup>
-
-    </servlet>
-
-
-    <servlet-mapping>
-        <servlet-name>SanityServlets</servlet-name>
-        <url-pattern>/sanity</url-pattern>
-    </servlet-mapping>
 
     <listener>
         <listener-class>dev.cooremans.utils.ContextLoaderListener</listener-class>

@@ -3,15 +3,16 @@ window.onload = function() {
 }
 
 function login() {
+    console.log("TEST")
     let username = document.getElementById("username").value
     let password = document.getElementById("password").value
 
-    fetch('/FoundationProject/auth', {
+    fetch('/FoundationProject/auth/login', {
         method: 'POST',
         body: JSON.stringify({username, password})
-    }) .then(res => {
+    }) .then((res) => {
         console.log(res)
-    }) .catch (err => {
+    }) .catch ((err) => {
         console.log("FAILED")
     })
 }

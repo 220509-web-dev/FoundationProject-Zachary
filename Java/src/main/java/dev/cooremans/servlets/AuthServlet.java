@@ -43,37 +43,40 @@ public class AuthServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String path = req.getServletPath();
 
-        List<Users> users = userDAO.getAllUsers();
+            if (path.equals("/auth/login")) {
 
-        HashMap<String, Object> credentials =  mapper.readValue(req.getInputStream(), HashMap.class);
+                List<Users> users = userDAO.getAllUsers();
 
-        String providedUsername = (String) credentials.get("username");
-        String providedPassword = (String) credentials.get("password");
+                HashMap<String, Object> credentials =  mapper.readValue(req.getInputStream(), HashMap.class);
 
-        for (Users user: users) {
-            if (providedUsername.equals(user.getUsername()) && providedPassword.equals(user.getPassword())) {
-                System.out.println("[LOG] - found user!");
+                String providedUsername = (String) credentials.get("username");
+                String providedPassword = (String) credentials.get("password");
+                Users user = userDAO.getUserByUsername(providedUsername);
 
-                // Because HTTP is a stateless protocol, we need a session to persist data across multiple requests
-                HttpSession session = req.getSession(); // use req.getSession(false) to prevent a session from being made
-                session.setAttribute("auth-user", user); // this attribute is visible on any requests with this session attached
+                if (providedUsername.equals(user.getUsername()) && providedPassword.equals(user.getPassword())) {
+                    System.out.println("[LOG] - found user!");
 
-                resp.setStatus(204); // NO CONTEnt (success but nothing to return)
+                    // Because HTTP is a stateless protocol, we need a session to persist data across multiple requests
+                    HttpSession session = req.getSession(); // use req.getSession(false) to prevent a session from being made
+                    session.setAttribute("auth-user", user); // this attribute is visible on any requests with this session attached
 
-                return; // return here otherwise we continue
+                    resp.setStatus(204); // NO CONTEnt (success but nothing to return)
+
+                    return; // return here otherwise we continue
+                }
+                resp.setStatus(400);
+                resp.setContentType("application/json");
+
+                HashMap<String, Object> errorMessage = new HashMap<>();
+                errorMessage.put("code", 400);
+                errorMessage.put("message", "No user found with provided credentials");
+                errorMessage.put("timestamp", LocalDateTime.now().toString());
+
+                resp.getWriter().write(mapper.writeValueAsString(errorMessage));
+
             }
-        }
-
-        resp.setStatus(400);
-        resp.setContentType("application/json");
-
-        HashMap<String, Object> errorMessage = new HashMap<>();
-        errorMessage.put("code", 400);
-        errorMessage.put("message", "No user found with provided credentials");
-        errorMessage.put("timestamp", LocalDateTime.now().toString());
-
-        resp.getWriter().write(mapper.writeValueAsString(errorMessage));
 
     }
 }

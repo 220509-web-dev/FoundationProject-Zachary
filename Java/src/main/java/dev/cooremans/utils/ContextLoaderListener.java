@@ -24,12 +24,12 @@ public class ContextLoaderListener implements ServletContextListener {
         UsersDaoPostgres userDAO = new UsersDaoPostgres();
         AuthService authService = new AuthService(userDAO);
 
-        UserServlet userServlet = new UserServlet(mapper, authService);
+        UserServlet userServlet = new UserServlet(mapper, userDAO, authService);
         AuthServlet authServlet = new AuthServlet(mapper, userDAO);
 
         ServletContext context = sce.getServletContext();
 
-        context.addServlet("AuthServlet", authServlet).addMapping("/auth/*");
+        context.addServlet("AuthServlet", authServlet).addMapping("/auth/*", "/auth/login");
 
         ServletRegistration.Dynamic registeredServlet = context.addServlet("UserServlet", userServlet);
         registeredServlet.setLoadOnStartup(3);
