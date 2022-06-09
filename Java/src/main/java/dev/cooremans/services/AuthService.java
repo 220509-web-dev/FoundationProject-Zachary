@@ -5,14 +5,15 @@ import dev.cooremans.dto.ResourceCreationResponse;
 import dev.cooremans.entities.Users;
 import dev.cooremans.utils.exceptions.InvalidRequestException;
 
-public class UsersService {
+import java.util.List;
+
+public class AuthService {
 
     private final UsersDaoPostgres usersDAO;
 
-    public UsersService(UsersDaoPostgres usersDAO) {
+    public AuthService(UsersDaoPostgres usersDAO) {
         this.usersDAO = usersDAO;
     }
-
     public ResourceCreationResponse createNewUser(Users newUser) {
         if (newUser == null ||
                 newUser.getUsername() == null || newUser.getUsername().equals("") ||

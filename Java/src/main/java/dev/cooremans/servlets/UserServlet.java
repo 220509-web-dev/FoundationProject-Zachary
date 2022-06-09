@@ -1,11 +1,10 @@
 package dev.cooremans.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.cooremans.daos.UsersDaoPostgres;
 import dev.cooremans.dto.ErrorResponse;
 import dev.cooremans.dto.ResourceCreationResponse;
 import dev.cooremans.entities.Users;
-import dev.cooremans.services.UsersService;
+import dev.cooremans.services.AuthService;
 import dev.cooremans.utils.exceptions.DataSourceException;
 import dev.cooremans.utils.exceptions.InvalidRequestException;
 
@@ -16,15 +15,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class UserServlet extends HttpServlet {
 
     private final ObjectMapper mapper;
-    private final UsersService usersService;
+    private final AuthService authService;
 
-    public UserServlet(ObjectMapper mapper, UsersService usersService) {
+    public UserServlet(ObjectMapper mapper, AuthService authService) {
         this.mapper = mapper;
-        this.usersService = usersService;
+        this.authService = authService;
     }
 
     @Override
@@ -39,10 +39,8 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        List<Users> users = userDAO.getAllUsers();
-//        String respPayload = mapper.writeValueAsString(users);
-//        resp.setContentType("application/json");
-//        resp.getWriter().write(respPayload);
+        //List<Users> users = usersService.getAllUsers();
+
     }
 
     @Override
@@ -71,7 +69,7 @@ public class UserServlet extends HttpServlet {
         resp.setContentType("application/json");
         try{
             Users newUser = mapper.readValue(req.getInputStream(), Users.class);
-            ResourceCreationResponse payload = usersService.createNewUser(newUser);
+            ResourceCreationResponse payload = authService.createNewUser(newUser);
             resp.setStatus(201);
             resp.getWriter().write(mapper.writeValueAsString(payload));
         } catch (InvalidRequestException e) {

@@ -2,7 +2,7 @@ package dev.cooremans.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.cooremans.daos.UsersDaoPostgres;
-import dev.cooremans.services.UsersService;
+import dev.cooremans.services.AuthService;
 import dev.cooremans.servlets.AuthServlet;
 import dev.cooremans.servlets.UserServlet;
 
@@ -22,9 +22,9 @@ public class ContextLoaderListener implements ServletContextListener {
 
 
         UsersDaoPostgres userDAO = new UsersDaoPostgres();
-        UsersService usersService = new UsersService(userDAO);
+        AuthService authService = new AuthService(userDAO);
 
-        UserServlet userServlet = new UserServlet(mapper, usersService);
+        UserServlet userServlet = new UserServlet(mapper, authService);
         AuthServlet authServlet = new AuthServlet(mapper, userDAO);
 
         ServletContext context = sce.getServletContext();
