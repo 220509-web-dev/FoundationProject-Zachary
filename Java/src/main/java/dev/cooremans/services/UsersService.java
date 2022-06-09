@@ -25,5 +25,4 @@ public class UsersService {
         return new ResourceCreationResponse(usersDAO.save(newUser).getId());
     }
 
-
 }

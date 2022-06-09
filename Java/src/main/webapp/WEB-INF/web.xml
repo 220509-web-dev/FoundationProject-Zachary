@@ -7,7 +7,7 @@
     <display-name>FoundationProject</display-name>
     
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>Register.html</welcome-file>
     </welcome-file-list>
     <context-param>
         <param-name>test-context-key</param-name>
