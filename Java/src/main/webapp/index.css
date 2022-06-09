@@ -1,0 +1,27 @@
+
+body{
+    background-image: url("https://previews.123rf.com/images/nirut123rf/nirut123rf1702/nirut123rf170200711/71401738-double-exposure-of-businessman-handshake-on-industrial-business-background-connections-concept-eleme.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.FormContainer {
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2rem;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 5%;
+
+}
+
+.login {
+    font-size: 1.5rem;
+    background-color: grey;
+}
+
+.login:hover {
+    cursor: pointer;
+}

@@ -3,7 +3,6 @@ window.onload = function() {
 }
 
 function login() {
-    console.log("TEST")
     let username = document.getElementById("username").value
     let password = document.getElementById("password").value
 
@@ -14,5 +13,5 @@ function login() {
         console.log(res)
     }) .catch ((err) => {
         console.log("FAILED")
-    })
+    }) 
 }
