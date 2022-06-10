@@ -12,36 +12,69 @@
 
 <div class="FormContainer">
     <h2>Register</h2>
-        <div>
-        <label>
-            First Name:
-            <input type="text" id="first_name" placeholder="First Name"/>
-        </label>
-        <label>
-            Last Name:
-            <input type="text" id="last_name" placeholder="Last Name"/>
-        </label>
-        <label>
-            Email:
-            <input type="text" id="email" placeholder="Email"/>
-        </label>
-        <label>
-            Username:
-            <input type="text" id="username" placeholder="Username"/>
-        </label>
-        <label>
-            Password:
-            <input type="password" id="password" placeholder="Password"/>
-        </label>
-        <label>
-            Role Id:
-            <input type="text" id="role_id" placeholder="Related Role"/>
-        </label>
-        <label>
-            Department:
-            <input type="text" id="department_id" placeholder="Department"/>
-        </label>
-    </div>
+        <div class="inner">
+            <label>
+                First Name:
+                <input 
+                    type="text" 
+                    id="first_name" 
+                    placeholder="First Name"
+                />
+            </label>
+            <label>
+                Last Name:
+                <input 
+                    type="text" 
+                    id="last_name" 
+                    placeholder="Last Name"
+                />
+            </label>
+            <label>
+                Email:
+                <input 
+                    type="text" 
+                    id="email" 
+                    placeholder="Email"
+                />
+            </label>
+            <label>
+                Username:
+                <input 
+                    type="text" 
+                    id="username" 
+                    placeholder="Username"
+                />
+            </label>
+            <label>
+                Password:
+                <input 
+                    type="password" 
+                    id="password" 
+                    placeholder="Password"
+                />
+            </label>
+            <div>
+                <label>
+                    Role
+                    <input type="radio" id="1" name='role_id' value="1">
+                    <label for="1">Engineer 1</label>
+                    <input type="radio" id="2" name='role_id' value="2">
+                    <label for="2">Engineer 2</label>
+                    <input type="radio" id="3" name='role_id' value="3">
+                    <label for="3">Senior Developer</label>
+                    <input type="radio" id="4" name='role_id' value="4">
+                    <label for="4">Intern</label>
+            </label>
+            </div>
+            <label>
+                Department:
+                <input 
+                    type="text" 
+                    id="department_id" 
+                    placeholder="Department"
+                />
+            </label>
+        </div>
     <button class="login" id="login-btn">Log in!</button>
 </div>
 
