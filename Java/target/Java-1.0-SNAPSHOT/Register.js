@@ -29,7 +29,7 @@ function Register() {
     }) .then(res => {
     console.log(res)
         console.log("Registered")
-        //window.location.href = 'index.html'
+        window.location.href = 'index.html'
     }) .catch (err => {
         console.log("FAILED")
     })
