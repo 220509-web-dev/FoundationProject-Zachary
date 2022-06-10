@@ -11,7 +11,12 @@ function login() {
         body: JSON.stringify({username, password})
     }) .then((res) => {
         console.log(res)
-        console.log("Logged in")
+        if (res.ok) {
+            console.log("Logged in")
+        } else {
+
+        console.log("Invalid credentials")
+        }
     }) .catch ((err) => {
         console.log("FAILED")
     }) 
