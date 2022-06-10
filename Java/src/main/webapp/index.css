@@ -13,7 +13,11 @@ body{
     font-size: 2rem;
     width: 50%;
     margin-left: 25%;
-    margin-top: 5%;
+    height: 100%;
+}
+.inner {
+    display: flex;
+    flex-direction: column;
 }
 
 .login {
