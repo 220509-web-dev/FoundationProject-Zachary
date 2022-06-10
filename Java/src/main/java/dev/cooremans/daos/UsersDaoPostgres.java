@@ -194,13 +194,4 @@ public class UsersDaoPostgres implements UsersDAO{
 
     }
 
-//    public Users save(Users newUser) {
-//        try(Connection conn = ConnectionUtil.getConnection()) {
-//            String sql = "INSERT INTO Users Values (default, ?, ?, ?, ?, ?, ?, ?)";
-//            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//        } catch(SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
 }

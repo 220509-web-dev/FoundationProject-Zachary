@@ -29,7 +29,16 @@ public class AuthService {
         return new ResourceCreationResponse(usersDAO.save(newUser).getId());
     }
 
+    public Users login(String username, String password) {
 
+        Users check = usersDAO.getUserByUsername(username);
+
+        if(check != null) {
+            return check;
+        } else {
+            return null;
+        }
+    }
 
     public List<Users> getUsers() {
         return users;

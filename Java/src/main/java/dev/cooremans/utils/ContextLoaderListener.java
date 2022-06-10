@@ -25,7 +25,7 @@ public class ContextLoaderListener implements ServletContextListener {
         AuthService authService = new AuthService(userDAO);
 
         UserServlet userServlet = new UserServlet(mapper, userDAO, authService);
-        AuthServlet authServlet = new AuthServlet(mapper, userDAO);
+        AuthServlet authServlet = new AuthServlet(mapper, userDAO, authService);
 
         ServletContext context = sce.getServletContext();
 
